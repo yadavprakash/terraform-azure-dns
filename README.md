@@ -1,6 +1,6 @@
-# Terraform-azure-log-analytics
+# Terraform-azure-dns
 
-# Terraform Azure Cloud Log-Analytics Module
+# Terraform Azure Cloud DNS Module
 
 ## Table of Contents
 - [Introduction](#introduction)
