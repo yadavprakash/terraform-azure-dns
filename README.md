@@ -21,22 +21,49 @@ for creating AZURE resources, and you can customize the inputs as needed. Below 
 # Example: log-analytics
 
 ```hcl
-module "log-analytics" {
-  source                           = "git::https://github.com/opsstation/terraform-azure-log-analytics.git?ref=v1.0.0"
-  name                             = "app"
-  environment                      = "test"
-  resource_group_name              = module.resource_group.resource_group_name
-  log_analytics_workspace_location = module.resource_group.resource_group_location
 
+module "dns_zone" {
+  depends_on                   = [module.resource_group, module.vnet]
+  source      = "git::https://github.com/opsstation/terraform-azuredns-.git?ref=v1.0.0"
+  name                         = local.name
+  environment                  = local.environment
+  resource_group_name          = module.resource_group.resource_group_name
+  dns_zone_names               = "example0000.com"
+  private_registration_enabled = true
+  private_dns                  = true
+  private_dns_zone_name        = "webserver0000.com"
+  virtual_network_id           = module.vnet.vnet_id
+  a_records = [{
+    name    = "test"
+    ttl     = 3600
+    records = ["10.0.180.17", "10.0.180.18"]
+  },
+    {
+      name    = "test2"
+      ttl     = 3600
+      records = ["10.0.180.17", "10.0.180.18"]
+    }]
+
+  cname_records = [{
+    name   = "test1"
+    ttl    = 3600
+    record = "example.com"
+  }]
+
+  ns_records = [{
+    name    = "test2"
+    ttl     = 3600
+    records = ["ns1.example.com.", "ns2.example.com."]
+  }]
 }
 ```
 This example demonstrates how to create various AZURE resources using the provided modules. Adjust the input values to suit your specific requirements.
 
 # Examples
-For detailed examples on how to use this module, please refer to the [example](https://github.com/opsstation/terraform-azure-log-analytics/blob/master/_example) directory within this repository.
+For detailed examples on how to use this module, please refer to the [example](https://github.com/opsstation/terraform-azure-dns/blob/master/_example) directory within this repository.
 
 # License
-This Terraform module is provided under the **MIT** License. Please see the [LICENSE](https://github.com/opsstation/terraform-azure-log-analytics/blob/master/LICENSE) file for more details.
+This Terraform module is provided under the **MIT** License. Please see the [LICENSE](https://github.com/opsstation/terraform-azure-dns/blob/master/LICENSE) file for more details.
 
 # Author
 Your Name
