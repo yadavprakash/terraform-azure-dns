@@ -12,7 +12,7 @@
 - [Outputs](#outputs)
 
 ## Introduction
-This repository contains Terraform code to deploy resources on Microsoft Azure, including a resource group and a azure-log-analytics.
+This repository contains Terraform code to deploy resources on Microsoft Azure, including a resource group and a dns.
 
 ## Usage
 To use this module, you should have Terraform installed and configured for AZURE. This module provides the necessary Terraform configuration
