@@ -3,12 +3,12 @@ provider "azurerm" {
 }
 
 locals {
-  name        = "opsstation"
+  name        = "yadavprakash"
   environment = "test"
 }
 
 module "resource_group" {
-  source      = "git::https://github.com/opsstation/terraform-azure-resource-group.git?ref=v1.0.0"
+  source      = "git::https://github.com/yadavprakash/terraform-azure-resource-group.git?ref=v1.0.0"
   name        = local.name
   environment = local.environment
   location    = "Canada Central"
@@ -16,7 +16,7 @@ module "resource_group" {
 
 
 module "vnet" {
-  source              = "git::https://github.com/opsstation/terraform-azure-vnet.git?ref=v1.0.0"
+  source              = "git::https://github.com/yadavprakash/terraform-azure-vnet.git?ref=v1.0.0"
   name                = local.name
   environment         = local.environment
   resource_group_name = module.resource_group.resource_group_name
@@ -59,3 +59,4 @@ module "dns_zone" {
     records = ["ns1.example.com.", "ns2.example.com."]
   }]
 }
+
